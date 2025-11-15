@@ -1,197 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard with Accordion - Bootstrap Local</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anthropology of Cosmos</title>
 
-  <!-- Local Bootstrap CSS -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap.min.css">
 
   <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .sidebar {
-      width: 220px;
-      height: 100vh;
-      background: #343a40;
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
       color: white;
+      background: radial-gradient(ellipse at bottom, #0d1b2a, #000000);
+      background-size: cover;
+      animation: space 10s infinite alternate;
+      overflow-x: hidden;
+      height: 100%;
+    }
+
+    @keyframes space {
+      from { background-color: #000814; }
+      to { background-color: #001d3d; }
+    }
+
+    .site-nav {
       position: fixed;
       top: 0;
-      left: 0;
-      padding: 20px 10px;
+      width: 100%;
+      z-index: 999;
+      background: rgba(2,6,23,0.75);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .sidebar a {
-      color: #e0e0e0;
+
+    .site-nav .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      color: #e7f6ff;
+      font-weight: 700;
+      font-size: 1.15rem;
       text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .nav-links li a {
+      color: #cfeffd;
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 6px;
+      transition: background .18s, color .18s;
+      font-weight: 600;
+    }
+
+    .nav-links li a:hover {
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .hamb {
       display: block;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 5px;
+      width: 22px;
+      height: 2px;
+      background: #cfeffd;
+      position: relative;
+      transition: transform .25s ease;
     }
-    .sidebar a:hover {
-      background: #495057;
+
+    .hamb::before, .hamb::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 22px;
+      height: 2px;
+      background: #cfeffd;
+      transition: transform .25s ease, top .25s ease;
     }
-    .content {
-      margin-left: 240px;
+
+    .hamb::before { top: -7px; }
+    .hamb::after { top: 7px; }
+
+    @media (max-width: 900px) {
+      .nav-toggle { display: block; }
+
+      .nav-links {
+        position: absolute;
+        right: 12px;
+        top: 64px;
+        background: rgba(3,8,30,0.95);
+        border-radius: 8px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        min-width: 180px;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height .32s ease;
+        box-shadow: 0 8px 24px rgba(2,6,23,0.6);
+      }
+
+      .nav-links li a {
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      .nav-links.open { max-height: 480px; }
+
+      .nav-toggle.open .hamb {
+        transform: rotate(45deg);
+      }
+
+      .nav-toggle.open .hamb::before {
+        transform: rotate(90deg);
+        top: 0;
+      }
+
+      .nav-toggle.open .hamb::after { display: none; }
+    }
+
+    .sr-only {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    body { padding-top: 68px; }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
       padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00b4d8, 0 0 20px #0077b6; }
+      to { text-shadow: 0 0 30px #90e0ef, 0 0 60px #48cae4; }
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #caf0f8;
+    }
+
+    .btn-custom {
+      background: transparent;
+      border: 2px solid #00b4d8;
+      color: #00b4d8;
+      border-radius: 50px;
+      padding: 10px 25px;
+      transition: all .3s ease;
+    }
+
+    .btn-custom:hover {
+      background: #00b4d8;
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1rem; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h4>Dashboard</h4>
-    <a href="#">Home</a>
-    <a href="#">Components</a>
-    <a href="#">Settings</a>
-  </div>
+  <nav class="site-nav">
+    <div class="container">
+      <a class="brand" href="#">Anthropology of Cosmos</a>
 
-  <!-- Main Content -->
-  <div class="content">
-    <h2 class="mb-4">Bootstrap Components Accordion</h2>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+        <span class="hamb"></span>
+        <span class="sr-only">Menu</span>
+      </button>
 
-    <div class="accordion" id="mainAccordion">
-
-      <!-- Accordion 1: Alerts -->
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#alerts">
-            Alerts (Bootstrap Component 1)
-          </button>
-        </h2>
-        <div id="alerts" class="accordion-collapse collapse show">
-          <div class="accordion-body">
-            <div class="alert alert-primary">This is a primary alert</div>
-            <div class="alert alert-success">Success! Everything works.</div>
-            <div class="alert alert-danger">Danger alert example.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#cards">
-            Cards (Bootstrap Component 2)
-          </button>
-        </h2>
-        <div id="cards" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <div class="card" style="width: 18rem;">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="">
-              <div class="card-body">
-                <h5 class="card-title">Sample Card</h5>
-                <p class="card-text">This is a simple Bootstrap card example.</p>
-                <button class="btn btn-primary">Read More</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#listGroup">
-            List Group (Bootstrap Component 3)
-          </button>
-        </h2>
-        <div id="listGroup" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <ul class="list-group" style="max-width: 300px;">
-              <li class="list-group-item">Item 1</li>
-              <li class="list-group-item">Item 2</li>
-              <li class="list-group-item">Item 3</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#table">
-            Table (Bootstrap Component 4)
-          </button>
-        </h2>
-        <div id="table" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <table class="table table-bordered table-striped">
-              <thead class="table-dark">
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Role</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>1</td><td>Freny</td><td>Admin</td></tr>
-                <tr><td>2</td><td>John</td><td>User</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#forms">
-            Forms (Bootstrap Component 5)
-          </button>
-        </h2>
-        <div id="forms" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <form style="max-width: 400px;">
-              <label class="form-label">Name</label>
-              <input type="text" class="form-control mb-2">
-
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control mb-2">
-
-              <button class="btn btn-success w-100">Submit</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#progressBars">
-            Progress Bars (Bootstrap Component 6)
-          </button>
-        </h2>
-        <div id="progressBars" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <div class="progress mb-2">
-              <div class="progress-bar" style="width: 40%"></div>
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-success" style="width: 70%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#buttons">
-            Buttons (Bootstrap Component 7)
-          </button>
-        </h2>
-        <div id="buttons" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <button class="btn btn-primary">Primary</button>
-            <button class="btn btn-danger">Danger</button>
-            <button class="btn btn-warning">Warning</button>
-          </div>
-        </div>
-      </div>
-
+      <ul id="primary-nav" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="books.html">Books</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </div>
-  </div>
+  </nav>
 
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <section class="hero">
+    <h1>Anthropology of Cosmos</h1>
+    <p>Exploring the harmony between Space, Science, and Human Curiosity</p>
+    <a href="learn.html" class="btn btn-custom mt-3">Begin Your Journey</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Anthropology of Cosmos | Designed by Freny Suchak</p>
+  </footer>
+
+  <script>
+    (function(){
+      const toggle = document.querySelector('.nav-toggle');
+      const links  = document.getElementById('primary-nav');
+
+      if(!toggle || !links) return;
+
+      toggle.addEventListener('click', () => {
+        const isOpen = links.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth > 900) return;
+        if (!links.classList.contains('open')) return;
+        if (!e.target.closest('.site-nav')) {
+          links.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
+
+  <script src="bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
