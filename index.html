@@ -3,126 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap Dashboard with Accordion & Flip Cards</title>
-  <link href="bootstrap.min.css" rel="stylesheet">
+  <title>Dashboard with Accordion - Bootstrap Local</title>
+
+  <!-- Local Bootstrap CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
   <style>
     body {
       background-color: #f8f9fa;
     }
-    .dashboard-header {
-      background-color: #343a40;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    .accordion-button {
-      font-weight: 600;
-    }
-
-    .flip-card {
-      background-color: transparent;
-      width: 100%;
-      height: 250px;
-      perspective: 1000px;
-    }
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .flip-card-front img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .flip-card-back {
-      background-color: #007bff;
+    .sidebar {
+      width: 220px;
+      height: 100vh;
+      background: #343a40;
       color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transform: rotateY(180deg);
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 10px;
+    }
+    .sidebar a {
+      color: #e0e0e0;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+    .sidebar a:hover {
+      background: #495057;
+    }
+    .content {
+      margin-left: 240px;
       padding: 20px;
     }
   </style>
 </head>
+
 <body>
 
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h4>Dashboard</h4>
+    <a href="#">Home</a>
+    <a href="#">Components</a>
+    <a href="#">Settings</a>
+  </div>
 
-  <header class="dashboard-header">
-    <h2>Dashboard</h2>
-  </header>
+  <!-- Main Content -->
+  <div class="content">
+    <h2 class="mb-4">Bootstrap Components Accordion</h2>
 
+    <div class="accordion" id="mainAccordion">
 
-  <div class="container my-4">
-    <div class="accordion" id="dashboardAccordion">
-
-    
+      <!-- Accordion 1: Alerts -->
       <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Flip Cards
+        <h2 class="accordion-header">
+          <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#alerts">
+            Alerts (Bootstrap Component 1)
           </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#dashboardAccordion">
+        <div id="alerts" class="accordion-collapse collapse show">
           <div class="accordion-body">
-            <div class="row g-3">
-        
-              <div class="col-md-4">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src="Card7.jpg" alt="Users">
-                    </div>
-                    <div class="flip-card-back">
-                      <h5>Users</h5>
-                      <p>1,250 Active Users</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-md-4">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src="card8.jpg" alt="Revenue">
-                    </div>
-                    <div class="flip-card-back" style="background-color:#28a745;">
-                      <h5>Revenue</h5>
-                      <p>85,000</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-              <div class="col-md-4">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src="Card6.jpg" alt="Orders">
-                    </div>
-                    <div class="flip-card-back" style="background-color:#ffc107; color:black;">
-                      <h5>New Orders</h5>
-                      <p>320 Today</p>
-                    </div>
-                  </div>
-                </div>
+            <div class="alert alert-primary">This is a primary alert</div>
+            <div class="alert alert-success">Success! Everything works.</div>
+            <div class="alert alert-danger">Danger alert example.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#cards">
+            Cards (Bootstrap Component 2)
+          </button>
+        </h2>
+        <div id="cards" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <div class="card" style="width: 18rem;">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Sample Card</h5>
+                <p class="card-text">This is a simple Bootstrap card example.</p>
+                <button class="btn btn-primary">Read More</button>
               </div>
             </div>
           </div>
@@ -130,26 +93,41 @@
       </div>
 
       <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Data Table
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#listGroup">
+            List Group (Bootstrap Component 3)
           </button>
         </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#dashboardAccordion">
+        <div id="listGroup" class="accordion-collapse collapse">
           <div class="accordion-body">
-            <table class="table table-striped">
+            <ul class="list-group" style="max-width: 300px;">
+              <li class="list-group-item">Item 1</li>
+              <li class="list-group-item">Item 2</li>
+              <li class="list-group-item">Item 3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#table">
+            Table (Bootstrap Component 4)
+          </button>
+        </h2>
+        <div id="table" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <table class="table table-bordered table-striped">
               <thead class="table-dark">
                 <tr>
-                  <th>ID</th>
+                  <th>#</th>
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Status</th>
+                  <th>Role</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td>1</td><td>Aarav</td><td>aarav@example.com</td><td><span class="badge bg-success">Active</span></td></tr>
-                <tr><td>2</td><td>Meera</td><td>meera@example.com</td><td><span class="badge bg-warning">Pending</span></td></tr>
-                <tr><td>3</td><td>Rohan</td><td>rohan@example.com</td><td><span class="badge bg-danger">Inactive</span></td></tr>
+                <tr><td>1</td><td>Freny</td><td>Admin</td></tr>
+                <tr><td>2</td><td>John</td><td>User</td></tr>
               </tbody>
             </table>
           </div>
@@ -157,52 +135,55 @@
       </div>
 
       <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Registration Form
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#forms">
+            Forms (Bootstrap Component 5)
           </button>
         </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#dashboardAccordion">
+        <div id="forms" class="accordion-collapse collapse">
           <div class="accordion-body">
-            <form>
-              <div class="mb-3">
-                <label class="form-label">Full Name</label>
-                <input type="text" class="form-control" placeholder="Enter full name">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-control" placeholder="Enter email">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" placeholder="Enter password">
-              </div>
-              <button type="submit" class="btn btn-primary">Register</button>
-              <button type="reset" class="btn btn-secondary">Cancel</button>
+            <form style="max-width: 400px;">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control mb-2">
+
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control mb-2">
+
+              <button class="btn btn-success w-100">Submit</button>
             </form>
           </div>
         </div>
       </div>
 
       <div class="accordion-item">
-        <h2 class="accordion-header" id="headingFour">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            Alerts & Progress
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#progressBars">
+            Progress Bars (Bootstrap Component 6)
           </button>
         </h2>
-        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#dashboardAccordion">
+        <div id="progressBars" class="accordion-collapse collapse">
           <div class="accordion-body">
-            <div class="alert alert-success">Operation completed successfully!</div>
-            <div class="alert alert-danger">Error: Something went wrong.</div>
-            <div class="alert alert-warning">Warning: Check your inputs.</div>
+            <div class="progress mb-2">
+              <div class="progress-bar" style="width: 40%"></div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-success" style="width: 70%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <h6 class="mt-3">Project Progress</h6>
-            <div class="progress mb-2">
-              <div class="progress-bar bg-success" style="width: 75%;">75%</div>
-            </div>
-            <div class="progress mb-2">
-              <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width: 50%;">50%</div>
-            </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#buttons">
+            Buttons (Bootstrap Component 7)
+          </button>
+        </h2>
+        <div id="buttons" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-danger">Danger</button>
+            <button class="btn btn-warning">Warning</button>
           </div>
         </div>
       </div>
@@ -210,8 +191,7 @@
     </div>
   </div>
 
-  <script src="bootstrap.bundle.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
-
-
